@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600&family=Open+Sans:ital,wght@0,400;1,300&display=swap');
+
+body {
+    text-align: center;
+    font-family: 'Belanosima', sans-serif;
+}
+
+
+/* Header Styling */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+  }
+
+  /* Header logo styling */
+header img {
+    width: 100px; 
+    margin-left: 10px; 
+  }
+  
+/* Positioning from top of webpage */
+header h1 {
+    margin: 10px;
+  }
+
+/* Question container styling */
+#question-container {
+    margin-top: 100px;
+
+}
+
+/* Question Styling */
+#question {
+    font-size: 18px;
+}
+
+/* Flower image styling */
+#flower-image {
+    width: 400px;
+    height: auto;
+    margin-top: 10px;
+}
+
+/* Button container styling */
+#buttons-container {
+    margin-top: 20px;
+}
