@@ -1,4 +1,4 @@
-// Created an array of states (Starting with 13 Colonies)
+// Created an array of states (Starting with 13 Colonies) will hold the categories
 const states = [
   {
     state: "Connecticut",
@@ -70,7 +70,8 @@ const states = [
 let currQuestion = 0;
 // console.log(currQuestion);
 let currCategory = "flags";
-console.log(currCategory);
+// console.log(currCategory);
+let guessesLeft = 3;
 
 //Gets the id question in HTML
 const questionElement = document.getElementById("question");
@@ -87,6 +88,38 @@ loadQuestions = (category) => {
 
   if (category === "flags") {
     questionElement.textContent = "What state does this flag belong too?";
-    imageElement.src = states[currQuestion].flagimage;
+    imageElement.src = states[currQuestion].flagImage;
+  }
+  generateButtons();
+};
+
+//Creating a function on guessing an answer for the question.
+checkGuess = (guess) => {
+  const currState = states[currQuestion];
+
+  //If the guess is correct this will display the resultElement
+  if (guess.toLowerCase() === currState.state.toLowerCase()) {
+    if (currCategory === "flags") {
+      resultElement.textContent =
+        "Correct! This flag belongs to" + currState.state + "!";
+    }
+    //If all questions are answered correctly it will display this at the end
+    if (currQuestion === states.length - 1) {
+      questionElement.textContent =
+        "Congrats! You've guessed all the states correctly!";
+      buttonsContainer.innerHTML = "";
+      imageElement.src = "TriviaImages/Misc/thumbs-up.png";
+    } else {
+      // Continuing the questions till the end
+      currQuestion++;
+      if (currCategory === "flags") {
+        questionElement.textContent =
+          "Next Question: What state does this flag belong to?";
+        imageElement.src = states[currQuestion].flagImage;
+      }
+      //Ressetting the guesses you have and generating the buttons
+      guessesLeft = 3;
+      generateButtons();
+    }
   }
 };
