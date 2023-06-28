@@ -101,7 +101,7 @@ checkGuess = (guess) => {
   if (guess.toLowerCase() === currState.state.toLowerCase()) {
     if (currCategory === "flags") {
       resultElement.textContent =
-        "Correct! This flag belongs to" + currState.state + "!";
+        "Correct! This flag belongs to " + currState.state + "!";
     }
     //If all questions are answered correctly it will display this at the end
     if (currQuestion === states.length - 1) {
@@ -134,11 +134,19 @@ checkGuess = (guess) => {
   }
 };
 
+//Creating the state buttons with createElement to be generated under the class name "category-button and giving it a click event listener"
 generateButtons = () => {
   buttonsContainer.innerHTML = "";
 
   for (let i = 0; i < states.length; i++) {
     const button = document.createElement("button");
+    button.className = "category-button";
+    button.textContent = states[i].state;
+    button.addEventListener("click", function () {
+      checkGuess(states[i].state);
+    });
+
+    buttonsContainer.appendChild(button);
   }
 };
 

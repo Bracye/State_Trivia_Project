@@ -18,6 +18,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
     font-size: 36px;
     background-color: rgb(36, 36, 36);
     color: white;
@@ -43,18 +44,46 @@ header h1 {
 
 /* Question Styling */
 #question {
-    font-size: 24px;
-    margin-top: 20px;
+    font-size: 48px;
+    margin-top: 60px;
 }
 
 /* Flower image styling */
 #image {
-    width: 400px;
+    width: 650px;
     height: auto;
     margin-top: 10px;
+    border-radius: 10px;
+    border: none;
 }
 
 /* Button container styling */
 #buttons-container {
-    margin-top: 20px;
+    margin-top: 36px;
 }
+
+/* Generated button styling */
+.category-button {
+  font-family: 'Belanosima', sans-serif;
+  width: 200px;
+  height: 60px;
+  margin: 10px;
+  padding: 5px;
+  font-size: 24px;
+  background-color: #004798;
+  color: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.category-button:hover {
+  background-color: #003776;
+}
+
+
+#result {
+  font-size: 36px;
+  margin-top: 24px;
+}
+
