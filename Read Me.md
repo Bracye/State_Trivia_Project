@@ -15,6 +15,7 @@ Flags: Learn interesting facts about the flags that represent each state.
 
 # Later Updates
 
+- NavBar
 - Regions Splash Page
 - More categories (Flowers, Birds)
 - Fun Facts

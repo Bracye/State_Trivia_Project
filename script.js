@@ -108,7 +108,8 @@ checkGuess = (guess) => {
       questionElement.textContent =
         "Congrats! You've guessed all the states correctly!";
       buttonsContainer.innerHTML = "";
-      imageElement.src = "TriviaImages/Misc/thumbs-up.png";
+      imageElement.src = "TriviaImages/Misc/accept.png";
+      imageElement.classList.add("no-styling");
     } else {
       // Continuing the questions till the end
       currQuestion++;
@@ -117,6 +118,7 @@ checkGuess = (guess) => {
           "Next Question: What state does this flag belong to?";
         imageElement.src = states[currQuestion].flagImage;
       }
+
       //Ressetting the guesses you have and generating the buttons
       livesLeft = 3;
       generateButtons();
