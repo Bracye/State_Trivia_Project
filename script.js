@@ -71,7 +71,7 @@ let currQuestion = 0;
 // console.log(currQuestion);
 let currCategory = "flags";
 // console.log(currCategory);
-let guessesLeft = 3;
+let livesLeft = 3;
 
 //Gets the id question in HTML
 const questionElement = document.getElementById("question");
@@ -118,8 +118,29 @@ checkGuess = (guess) => {
         imageElement.src = states[currQuestion].flagImage;
       }
       //Ressetting the guesses you have and generating the buttons
-      guessesLeft = 3;
+      livesLeft = 3;
       generateButtons();
+    }
+  } else {
+    livesLeft--;
+
+    if (livesLeft > 0) {
+      resultElement.textContent = "Wrong! Try again. Lives left: " + livesLeft;
+    } else {
+      resultElement.textContent =
+        "Game Over! The correct answer was " + currState.state + ".";
+      livesLeft = 3;
     }
   }
 };
+
+generateButtons = () => {
+  buttonsContainer.innerHTML = "";
+
+  for (let i = 0; i < states.length; i++) {
+    const button = document.createElement("button");
+  }
+};
+
+//Loads the inital question for the category
+loadQuestions(currCategory);

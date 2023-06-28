@@ -20,3 +20,5 @@ Birds: Learn interesting facts about the birds that represent each state.
 
 - More categories
 - Difficulties
+
+# Resources
