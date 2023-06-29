@@ -1,125 +1,134 @@
-// Created an array of states (Starting with 13 Colonies) will hold the categories
+//Changed the state array to a class to be able to randomize objects instead of everything being connected.
+class State {
+  constructor(state, flagImage, flowerImage) {
+    this.state = state;
+    this.flagImage = flagImage;
+    this.flowerImage = flowerImage;
+  }
+}
+//Newly created objects will be listed here
 const states = [
-  {
-    state: "Connecticut",
-    flagImage: "TriviaImages/Flags/Connecticut_Flag.png",
-    flowerImage: "TriviaImages/Flowers/Mountain_Laurel.jpeg",
-  },
-  {
-    state: "Delaware",
-    flagImage: "TriviaImages/Flags/Delaware_Flag.png",
-    flowerImage: "TriviaImages/Flowers/Peach_Blossom.jpeg",
-  },
-  {
-    state: "Virginia",
-    flagImage: "TriviaImages/Flags/Virginia_Flag.png",
-    flowerImage: "TriviaImages/Flowers/American_Dogwood.jpeg",
-  },
-  {
-    state: "New York",
-    flagImage: "TriviaImages/Flags/NewYork_Flag.png",
-    flowerImage: "TriviaImages/Flowers/Rose.jpeg",
-  },
-  {
-    state: "Maryland",
-    flagImage: "TriviaImages/Flags/Maryland_Flag.png",
-    flowerImage: "TriviaImages/Flowers/Black_Eyed_Susan.jpeg",
-  },
-  {
-    state: "New Hampshire",
-    flagImage: "TriviaImages/Flags/NewHampshire_Flag.png",
-    flowerImage: "TriviaImages/Flowers/Purple_Lilac.jpeg",
-  },
-  {
-    state: "South Carolina",
-    flagImage: "TriviaImages/Flags/SouthCarolina_Flag.png",
-    flowerImage: "TriviaImages/Flowers/Yellow_Jessamine.jpeg",
-  },
-  {
-    state: "Massachusetts",
-    flagImage: "TriviaImages/Flags/Massachusetts_Flag.png",
-    flowerImage: "TriviaImages/Flowers/Mountain_Laurel.jpeg",
-  },
-  {
-    state: "Georgia",
-    flagImage: "TriviaImages/Flags/Georgia_Flag.png",
-    flowerImage: "TriviaImages/Flowers/Cherokee_Rose.jpeg",
-  },
-  {
-    state: "Rhode Island",
-    flagImage: "TriviaImages/Flags/RhodeIsland_Flag.png",
-    flowerImage: "TriviaImages/Flowers/Violet.jpeg",
-  },
-  {
-    state: "Pennsylvania",
-    flagImage: "TriviaImages/Flags/Pennsylvania_Flag.png",
-    flowerImage: "TriviaImages/Flowers/Mountain_Laurel.jpeg",
-  },
-  {
-    state: "North Carolina",
-    flagImage: "TriviaImages/Flags/NorthCarolina_Flag.png",
-    flowerImage: "TriviaImages/Flowering_Dogwood.jpeg",
-  },
-  {
-    state: "New Jersey",
-    flagImage: "TriviaImages/Flags/NewJersey_Flag.png",
-    flowerImage: "TriviaImages/Flowers/Violet.jpeg",
-  },
+  new State(
+    "Virginia",
+    "TriviaImages/Flags/Virginia_Flag.png",
+    "TriviaImages/Flowers/Mountain_Laurel.jpeg"
+  ),
+  new State(
+    "New York",
+    "TriviaImages/Flags/NewYork_Flag.png",
+    "TriviaImages/Flowers/Peach_Blossom.jpeg"
+  ),
+  new State(
+    "Massachusetts",
+    "TriviaImages/Flags/Massachusetts_Flag.png",
+    "TriviaImages/Flowers/Mountain_Laurel.jpeg"
+  ),
+  new State(
+    "Maryland",
+    "TriviaImages/Flags/Maryland_Flag.png",
+    "TriviaImages/Flowers/Peach_Blossom.jpeg"
+  ),
+  new State(
+    "Rhode Island",
+    "TriviaImages/Flags/RhodeIsland_Flag.png",
+    "TriviaImages/Flowers/Mountain_Laurel.jpeg"
+  ),
+  new State(
+    "Connecticut",
+    "TriviaImages/Flags/Connecticut_Flag.png",
+    "TriviaImages/Flowers/Peach_Blossom.jpeg"
+  ),
+  new State(
+    "New Hampshire",
+    "TriviaImages/Flags/NewHampshire_Flag.png",
+    "TriviaImages/Flowers/Mountain_Laurel.jpeg"
+  ),
+  new State(
+    "Delaware",
+    "TriviaImages/Flags/Delaware_Flag.png",
+    "TriviaImages/Flowers/Peach_Blossom.jpeg"
+  ),
+  new State(
+    "North Carolina",
+    "TriviaImages/Flags/NorthCarolina_Flag.png",
+    "TriviaImages/Flowers/Peach_Blossom.jpeg"
+  ),
+  new State(
+    "South Carolina",
+    "TriviaImages/Flags/SouthCarolina_Flag.png",
+    "TriviaImages/Flowers/Mountain_Laurel.jpeg"
+  ),
+  new State(
+    "New Jersey",
+    "TriviaImages/Flags/NewJersey_Flag.png",
+    "TriviaImages/Flowers/Peach_Blossom.jpeg"
+  ),
+  new State(
+    "Pennsylvania",
+    "TriviaImages/Flags/Pennsylvania_Flag.png",
+    "TriviaImages/Flowers/Mountain_Laurel.jpeg"
+  ),
+  new State(
+    "Georgia",
+    "TriviaImages/Flags/Georgia_Flag.png",
+    "TriviaImages/Flowers/Peach_Blossom.jpeg"
+  ),
 ];
 
+//Initial variables
 let currQuestion = 0;
-// console.log(currQuestion);
 let currCategory = "flags";
-// console.log(currCategory);
 let livesLeft = 3;
 
-//Gets the id question in HTML
+//Getting elements from the html to be dynamicly add text and images
 const questionElement = document.getElementById("question");
-//Gets the id image in HTML
 const imageElement = document.getElementById("image");
-//Gets the id buttons-container in HTML
 const buttonsContainer = document.getElementById("buttons-container");
-//Gets the id result in HTML
 const resultElement = document.getElementById("result");
 
-//Creating a function to load a specific category, and adding a question and image element to the corresponding category question
+//Function to load the categories with the corresponding randomized images and add the question to it
 loadQuestions = (category) => {
   currCategory = category;
 
+  //Category is flag and has a question text created for it in question id in the HTML
   if (category === "flags") {
-    questionElement.textContent = "What state does this flag belong too?";
-    imageElement.src = states[currQuestion].flagImage;
+    questionElement.textContent = "What state does this flag belong to?";
+    generateRandomFlag();
   }
   generateButtons();
 };
 
-//Creating a function on guessing an answer for the question.
+//Function to randomize the flagimage will be added into the image id in the HTML
+generateRandomFlag = () => {
+  currQuestion = Math.floor(Math.random() * states.length);
+  const currState = states[currQuestion];
+  imageElement.src = currState.flagImage;
+};
+
 checkGuess = (guess) => {
   const currState = states[currQuestion];
 
-  //If the guess is correct this will display the resultElement
-  if (guess.toLowerCase() === currState.state.toLowerCase()) {
+  if (guess === currState.state) {
     if (currCategory === "flags") {
       resultElement.textContent =
         "Correct! This flag belongs to " + currState.state + "!";
     }
-    //If all questions are answered correctly it will display this at the end
-    if (currQuestion === states.length - 1) {
+
+    currState.guessed = true; // Mark the flag as guessed
+
+    const correctlyGuessedFlags = states.filter((state) => state.guessed);
+    if (correctlyGuessedFlags.length === states.length) {
       questionElement.textContent =
         "Congrats! You've guessed all the states correctly!";
       buttonsContainer.innerHTML = "";
       imageElement.src = "TriviaImages/Misc/accept.png";
-      imageElement.classList.add("no-styling");
     } else {
-      // Continuing the questions till the end
       currQuestion++;
       if (currCategory === "flags") {
         questionElement.textContent =
           "Next Question: What state does this flag belong to?";
-        imageElement.src = states[currQuestion].flagImage;
+        generateRandomFlag();
       }
-
-      //Ressetting the guesses you have and generating the buttons
       livesLeft = 3;
       generateButtons();
     }
@@ -135,22 +144,22 @@ checkGuess = (guess) => {
     }
   }
 };
-
-//Creating the state buttons with createElement to be generated under the class name "category-button and giving it a click event listener"
+//Generating the possible answers function
 generateButtons = () => {
   buttonsContainer.innerHTML = "";
 
+  //Looping through the state objects to add the button to a class and get the states name
   for (let i = 0; i < states.length; i++) {
     const button = document.createElement("button");
     button.className = "category-button";
     button.textContent = states[i].state;
+    //Adding a click to the button
     button.addEventListener("click", function () {
       checkGuess(states[i].state);
     });
-
+    //appending it to the button container which is in the HTML
     buttonsContainer.appendChild(button);
   }
 };
-
-//Loads the inital question for the category
+//Calling the function
 loadQuestions(currCategory);

@@ -22,3 +22,9 @@ Flags: Learn interesting facts about the flags that represent each state.
 - Difficulties
 
 # Resources
+
+Wikipedia
+Flaticon
+W3bSchools
+FreeCodeCamp
+StackOverflow
