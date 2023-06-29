@@ -1,30 +1,17 @@
-# State Trivia
+# State Trivia Game
 
-Interactive quiz game to test your knowledge on the about different states. Current categories created are State: Flags.
+Welcome to the State Trivia Game! This interactive game tests your knowledge about the United States. Have fun and learn interesting facts along the way.
 
-# Rules
+# Getting Started
 
-Each player has 3 lives per turn.
-If the player gets the question right it will update their score by 1
-If the player gets all 3 guesses wrong the quiz will give them the answer and they will start over
+These instructions will guide you on how to play the State Trivia Game on your computer.
 
-# Features/Categories
+# Game Rules
 
-Current States: 13 states will be implemented in the 1 current categories.
-Flags: Learn interesting facts about the flags that represent each state.
-
-# Later Updates
-
-- NavBar
-- Regions Splash Page
-- More categories (Flowers, Birds)
-- Fun Facts
-- Difficulties
+The game consists of image questions about the states of the United States flags.
+Each question has a flag image that you must answer with the corresponding state options.
+You will receive immediate feedback on whether your answer was correct or not.
 
 # Resources
 
-Wikipedia
-Flaticon
-W3bSchools
-FreeCodeCamp
-StackOverflow
+https://javascript.plainenglish.io/how-to-write-a-stunning-readme-for-your-projects-2303bf6827b8

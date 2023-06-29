@@ -22,16 +22,16 @@ const states = [
   new State("Georgia", "TriviaImages/Flags/Georgia_Flag.png"),
 ];
 
-//Initial variables
-let currQuestion = 0;
-let currCategory = "flags";
-let livesLeft = 3;
-
 //Getting elements from the html to be dynamicly add text and images
 const questionElement = document.getElementById("question");
 const imageElement = document.getElementById("image");
 const buttonsContainer = document.getElementById("buttons-container");
 const resultElement = document.getElementById("result");
+
+//Initial variables
+let currQuestion = 0;
+let currCategory = "flags";
+let livesLeft = 3;
 
 //Function to load the categories with the corresponding randomized images and add the question to it
 loadQuestions = (category) => {
@@ -75,6 +75,10 @@ checkGuess = (guess) => {
       resultElement.innerHTML = "";
       //Displays the image
       imageElement.src = "TriviaImages/Misc/accept.png";
+      //removes flagimage styling after all are answered
+      imageElement.classList.remove("no-styling");
+      imageElement.style.border = "none";
+      imageElement.style.boxShadow = "none";
     } else {
       //If flags still need to be answered it will go to the enxt question for this category
       currQuestion++;
@@ -93,6 +97,7 @@ checkGuess = (guess) => {
     if (livesLeft > 0) {
       resultElement.textContent = "Wrong! Try again. Lives left: " + livesLeft;
     } else {
+      //Result for if you run out of lives
       resultElement.textContent =
         "Game Over! The correct answer was " + currState.state + ".";
       livesLeft = 3;
