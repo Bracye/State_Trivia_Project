@@ -1,78 +1,25 @@
 //Changed the state array to a class to be able to randomize objects instead of everything being connected.
 class State {
-  constructor(state, flagImage, flowerImage) {
+  constructor(state, flagImage) {
     this.state = state;
     this.flagImage = flagImage;
-    this.flowerImage = flowerImage;
   }
 }
 //Newly created objects will be listed here
 const states = [
-  new State(
-    "Virginia",
-    "TriviaImages/Flags/Virginia_Flag.png",
-    "TriviaImages/Flowers/Mountain_Laurel.jpeg"
-  ),
-  new State(
-    "New York",
-    "TriviaImages/Flags/NewYork_Flag.png",
-    "TriviaImages/Flowers/Peach_Blossom.jpeg"
-  ),
-  new State(
-    "Massachusetts",
-    "TriviaImages/Flags/Massachusetts_Flag.png",
-    "TriviaImages/Flowers/Mountain_Laurel.jpeg"
-  ),
-  new State(
-    "Maryland",
-    "TriviaImages/Flags/Maryland_Flag.png",
-    "TriviaImages/Flowers/Peach_Blossom.jpeg"
-  ),
-  new State(
-    "Rhode Island",
-    "TriviaImages/Flags/RhodeIsland_Flag.png",
-    "TriviaImages/Flowers/Mountain_Laurel.jpeg"
-  ),
-  new State(
-    "Connecticut",
-    "TriviaImages/Flags/Connecticut_Flag.png",
-    "TriviaImages/Flowers/Peach_Blossom.jpeg"
-  ),
-  new State(
-    "New Hampshire",
-    "TriviaImages/Flags/NewHampshire_Flag.png",
-    "TriviaImages/Flowers/Mountain_Laurel.jpeg"
-  ),
-  new State(
-    "Delaware",
-    "TriviaImages/Flags/Delaware_Flag.png",
-    "TriviaImages/Flowers/Peach_Blossom.jpeg"
-  ),
-  new State(
-    "North Carolina",
-    "TriviaImages/Flags/NorthCarolina_Flag.png",
-    "TriviaImages/Flowers/Peach_Blossom.jpeg"
-  ),
-  new State(
-    "South Carolina",
-    "TriviaImages/Flags/SouthCarolina_Flag.png",
-    "TriviaImages/Flowers/Mountain_Laurel.jpeg"
-  ),
-  new State(
-    "New Jersey",
-    "TriviaImages/Flags/NewJersey_Flag.png",
-    "TriviaImages/Flowers/Peach_Blossom.jpeg"
-  ),
-  new State(
-    "Pennsylvania",
-    "TriviaImages/Flags/Pennsylvania_Flag.png",
-    "TriviaImages/Flowers/Mountain_Laurel.jpeg"
-  ),
-  new State(
-    "Georgia",
-    "TriviaImages/Flags/Georgia_Flag.png",
-    "TriviaImages/Flowers/Peach_Blossom.jpeg"
-  ),
+  new State("Virginia", "TriviaImages/Flags/Virginia_Flag.png"),
+  new State("New York", "TriviaImages/Flags/NewYork_Flag.png"),
+  new State("Massachusetts", "TriviaImages/Flags/Massachusetts_Flag.png"),
+  new State("Maryland", "TriviaImages/Flags/Maryland_Flag.png"),
+  new State("Rhode Island", "TriviaImages/Flags/RhodeIsland_Flag.png"),
+  new State("Connecticut", "TriviaImages/Flags/Connecticut_Flag.png"),
+  new State("New Hampshire", "TriviaImages/Flags/NewHampshire_Flag.png"),
+  new State("Delaware", "TriviaImages/Flags/Delaware_Flag.png"),
+  new State("North Carolina", "TriviaImages/Flags/NorthCarolina_Flag.png"),
+  new State("South Carolina", "TriviaImages/Flags/SouthCarolina_Flag.png"),
+  new State("New Jersey", "TriviaImages/Flags/NewJersey_Flag.png"),
+  new State("Pennsylvania", "TriviaImages/Flags/Pennsylvania_Flag.png"),
+  new State("Georgia", "TriviaImages/Flags/Georgia_Flag.png"),
 ];
 
 //Initial variables
@@ -107,7 +54,7 @@ generateRandomFlag = () => {
 
 checkGuess = (guess) => {
   const currState = states[currQuestion];
-
+  //Getting the current catergory and giving a result if the guess is right
   if (guess === currState.state) {
     if (currCategory === "flags") {
       resultElement.textContent =
@@ -116,13 +63,18 @@ checkGuess = (guess) => {
 
     currState.guessed = true; // Mark the flag as guessed
 
-    const correctlyGuessedFlags = states.filter((state) => state.guessed);
-    if (correctlyGuessedFlags.length === states.length) {
+    //Filtering through the correctly guessed flags and when all are correct it will run
+    const correctGuessedFlags = states.filter((state) => state.guessed);
+    if (correctGuessedFlags.length === states.length) {
+      //Displays the message
       questionElement.textContent =
         "Congrats! You've guessed all the states correctly!";
+      //Removes the buttons
       buttonsContainer.innerHTML = "";
+      //Displays the image
       imageElement.src = "TriviaImages/Misc/accept.png";
     } else {
+      //If flags still need to be answered it will go to the enxt question for this category
       currQuestion++;
       if (currCategory === "flags") {
         questionElement.textContent =
@@ -133,8 +85,9 @@ checkGuess = (guess) => {
       generateButtons();
     }
   } else {
+    // If it is guessed incorrectly player will lose lives
     livesLeft--;
-
+    // If lives are still greater than 0 will get more chances, if not game is over
     if (livesLeft > 0) {
       resultElement.textContent = "Wrong! Try again. Lives left: " + livesLeft;
     } else {
