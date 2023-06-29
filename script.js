@@ -71,6 +71,8 @@ checkGuess = (guess) => {
         "Congrats! You've guessed all the states correctly!";
       //Removes the buttons
       buttonsContainer.innerHTML = "";
+      //Removes the result text
+      resultElement.innerHTML = "";
       //Displays the image
       imageElement.src = "TriviaImages/Misc/accept.png";
     } else {
