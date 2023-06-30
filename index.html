@@ -18,6 +18,15 @@
       <img src="TriviaImages/Flags/USA-Flag.png" alt="USA Flag" />
     </header>
 
+    <div class="category-buttons">
+      <button class="category-button" onclick="loadQuestions('flags')">
+        Flags
+      </button>
+      <button class="category-button" onclick="loadQuestions('flowers')">
+        Flowers
+      </button>
+    </div>
+
     <!-- Container for the questions w/ corresponding images-->
     <div id="question-container">
       <!-- Image Holder -->
@@ -29,8 +38,6 @@
 
     <!-- Container to hold all the state buttons -->
     <div id="buttons-container"></div>
-
-    <button id="reset-button" style="display: none">Reset Game</button>
 
     <!-- Used to give a result if the answer is right or wrong-->
     <div id="result"></div>

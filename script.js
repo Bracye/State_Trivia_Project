@@ -1,25 +1,78 @@
 //Changed the state array to a class to be able to randomize objects instead of everything being connected.
 class State {
-  constructor(state, flagImage) {
+  constructor(state, flagImage, flowerImage) {
     this.state = state;
     this.flagImage = flagImage;
+    this.flowerImage = flowerImage;
   }
 }
 //Newly created objects will be listed here
 const states = [
-  new State("Virginia", "TriviaImages/Flags/Virginia_Flag.png"),
-  new State("New York", "TriviaImages/Flags/NewYork_Flag.png"),
-  new State("Massachusetts", "TriviaImages/Flags/Massachusetts_Flag.png"),
-  new State("Maryland", "TriviaImages/Flags/Maryland_Flag.png"),
-  new State("Rhode Island", "TriviaImages/Flags/RhodeIsland_Flag.png"),
-  new State("Connecticut", "TriviaImages/Flags/Connecticut_Flag.png"),
-  new State("New Hampshire", "TriviaImages/Flags/NewHampshire_Flag.png"),
-  new State("Delaware", "TriviaImages/Flags/Delaware_Flag.png"),
-  new State("North Carolina", "TriviaImages/Flags/NorthCarolina_Flag.png"),
-  new State("South Carolina", "TriviaImages/Flags/SouthCarolina_Flag.png"),
-  new State("New Jersey", "TriviaImages/Flags/NewJersey_Flag.png"),
-  new State("Pennsylvania", "TriviaImages/Flags/Pennsylvania_Flag.png"),
-  new State("Georgia", "TriviaImages/Flags/Georgia_Flag.png"),
+  new State(
+    "Virginia",
+    "TriviaImages/Flags/Virginia_Flag.png",
+    "TriviaImages/Flowers/American_Dogwood.jpeg"
+  ),
+  new State(
+    "New York",
+    "TriviaImages/Flags/NewYork_Flag.png",
+    "TriviaImages/Flowers/Rose.jpeg"
+  ),
+  new State(
+    "Massachusetts",
+    "TriviaImages/Flags/Massachusetts_Flag.png",
+    "TriviaImages/Flowers/Mountain_Laurel.jpeg"
+  ),
+  new State(
+    "Maryland",
+    "TriviaImages/Flags/Maryland_Flag.png",
+    "TriviaImages/Flowers/Black_Eyed_Susan.jpeg"
+  ),
+  new State(
+    "Rhode Island",
+    "TriviaImages/Flags/RhodeIsland_Flag.png",
+    "TriviaImages/Flowers/Violet.jpeg"
+  ),
+  new State(
+    "Connecticut",
+    "TriviaImages/Flags/Connecticut_Flag.png",
+    "TriviaImages/Flowers/Mountain_Laurel.jpeg"
+  ),
+  new State(
+    "New Hampshire",
+    "TriviaImages/Flags/NewHampshire_Flag.png",
+    "TriviaImages/Flowers/Purple_Lilac.jpeg"
+  ),
+  new State(
+    "Delaware",
+    "TriviaImages/Flags/Delaware_Flag.png",
+    "TriviaImages/Flowers/Peach_Blossom.jpeg"
+  ),
+  new State(
+    "North Carolina",
+    "TriviaImages/Flags/NorthCarolina_Flag.png",
+    "TriviaImages/Flowers/Flowering_Dogwood.jpeg"
+  ),
+  new State(
+    "South Carolina",
+    "TriviaImages/Flags/SouthCarolina_Flag.png",
+    "TriviaImages/Flowers/Yellow_Jessamine.jpeg"
+  ),
+  new State(
+    "New Jersey",
+    "TriviaImages/Flags/NewJersey_Flag.png",
+    "TriviaImages/Flowers/Violet.jpeg"
+  ),
+  new State(
+    "Pennsylvania",
+    "TriviaImages/Flags/Pennsylvania_Flag.png",
+    "TriviaImages/Flowers/Mountain_Laurel.jpeg"
+  ),
+  new State(
+    "Georgia",
+    "TriviaImages/Flags/Georgia_Flag.png",
+    "TriviaImages/Flowers/Cherokee_rose.jpeg"
+  ),
 ];
 
 //Getting elements from the html to be dynamicly add text and images
@@ -37,19 +90,28 @@ let livesLeft = 3;
 loadQuestions = (category) => {
   currCategory = category;
 
-  //Category is flag and has a question text created for it in question id in the HTML
   if (category === "flags") {
     questionElement.textContent = "What state does this flag belong to?";
     generateRandomFlag();
+  } else if (category === "flowers") {
+    questionElement.textContent = "Which state is associated with this flower?";
+    generateRandomFlower();
   }
+
   generateButtons();
 };
 
-//Function to randomize the flagimage will be added into the image id in the HTML
+//Function to randomize the images will be added into the image id in the HTML
 generateRandomFlag = () => {
   currQuestion = Math.floor(Math.random() * states.length);
   const currState = states[currQuestion];
   imageElement.src = currState.flagImage;
+};
+
+generateRandomFlower = () => {
+  currQuestion = Math.floor(Math.random() * states.length);
+  const currState = states[currQuestion];
+  imageElement.src = currState.flowerImage;
 };
 
 checkGuess = (guess) => {
@@ -59,6 +121,9 @@ checkGuess = (guess) => {
     if (currCategory === "flags") {
       resultElement.textContent =
         "Correct! This flag belongs to " + currState.state + "!";
+    } else if (currCategory === "flowers") {
+      resultElement.textContent =
+        "Correct! The flower is associated with " + currState.state + "!";
     }
 
     currState.guessed = true; // Mark the flag as guessed
@@ -86,6 +151,10 @@ checkGuess = (guess) => {
         questionElement.textContent =
           "Next Question: What state does this flag belong to?";
         generateRandomFlag();
+      } else if (currCategory === "flowers") {
+        questionElement.textContent =
+          "Next Question: Which state does this flower belong to?";
+        generateRandomFlower();
       }
       livesLeft = 3;
       generateButtons();
@@ -104,21 +173,26 @@ checkGuess = (guess) => {
     }
   }
 };
-//Generating the possible answers function
 generateButtons = () => {
   buttonsContainer.innerHTML = "";
 
-  //Looping through the state objects to add the button to a class and get the states name
+  // Looping through the state objects to add the button to a class and get the state's name
   for (let i = 0; i < states.length; i++) {
     const button = document.createElement("button");
     button.className = "category-button";
     button.textContent = states[i].state;
-    //Adding a click to the button
+    // Adding a click event to the button
     button.addEventListener("click", function () {
       checkGuess(states[i].state);
     });
-    //appending it to the button container which is in the HTML
-    buttonsContainer.appendChild(button);
+
+    // Appending the button to the button container based on the current category
+    if (
+      (currCategory === "flags" && states[i].flagImage) ||
+      (currCategory === "flowers" && states[i].flowerImage)
+    ) {
+      buttonsContainer.appendChild(button);
+    }
   }
 };
 //Calling the function
