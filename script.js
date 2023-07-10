@@ -7,7 +7,7 @@ class State {
     this.guessed = false; // Initially set guessed as false
   }
 }
-//Newly created objects will be listed here
+//Array to hold the state objects
 const states = [
   new State(
     "Virginia",
@@ -83,42 +83,50 @@ const buttonsContainer = document.getElementById("buttons-container");
 const resultElement = document.getElementById("result");
 const tryAgainButton = document.getElementById("try-again")
 
-// Initial variables
+// Variables to keep track of the game
 let currQuestion = 0;
 let currCategory = "flags";
 let livesLeft = 3;
 
-// Function to load the categories with the corresponding randomized images and add the question to it
+// Function to load questions for a category
 loadQuestions = (category) => {
   currCategory = category;
 
+  //Setting the question based on the category
   if (category === "flags") {
     questionElement.textContent = "What state does this flag belong to?";
   } else if (category === "flowers") {
     questionElement.textContent = "Which state is associated with this flower?";
   }
 
+  //Generate a random image for the category
   generateRandomImage();
+  //Generate buttons for the category
   generateButtons();
 };
 
-// Function to randomize the images and add them to the image element
+// Function to randomize the images for the category
 generateRandomImage = () => {
+  //Get the unguessed states based on current category
   const unguessedStates = states.filter((state) => !state.guessed);
 
+  // IF All states have been guessed correctly
   if (unguessedStates.length === 0) {
-    // All states have been guessed correctly
+    //Display completion elements
     imageElement.src = "TriviaImages/Misc/accept.png";
     imageElement.classList.remove("no-styling");
     imageElement.style.border = "none";
     imageElement.style.boxShadow = "none";
+    //Show the try again button
     showTryAgainButton()
     return;
   }
 
+  //Get a random unguessed state
   const randomIndex = Math.floor(Math.random() * unguessedStates.length);
   const currState = unguessedStates[randomIndex];
 
+  //Set the image element souce based on the current category
   if (currCategory === "flags") {
     imageElement.src = currState.flagImage;
   } else if (currCategory === "flowers") {
@@ -128,12 +136,15 @@ generateRandomImage = () => {
   currQuestion = states.indexOf(currState);
 };
 
+//Function to check the guess against the current state
 checkGuess = (guess) => {
+  //Get the current state
   const currState = states[currQuestion];
-
+  //Check if correct
   if (guess === currState.state) {
     currState.guessed = true; // Mark the state as guessed
 
+    //Display a message based on the category
     if (currCategory === "flags") {
       resultElement.textContent =
         "Correct! This flag belongs to " + currState.state + "!";
@@ -205,12 +216,13 @@ shuffleArray = (array) => {
   return newArray;
 }
 
-//Function to generate the potentional state button answers
+//Function to generate buttons for the current category
 generateButtons = () => {
   buttonsContainer.innerHTML = "";
 
   const unguessedStates = states.filter((state) => !state.guessed);
-  const shuffledStates = shuffleArray(unguessedStates); // Shuffle the unguessed states
+  // Shuffle the unguessed states
+  const shuffledStates = shuffleArray(unguessedStates); 
 
   for (let i = 0; i < shuffledStates.length; i++) {
     const button = document.createElement("button");
@@ -230,14 +242,16 @@ showTryAgainButton = () => {
   tryAgainButton.classList.remove("hidden")
 };
 
-//Resets the game, lives, and hides the try again button
+//Function to Reset the game, lives, and hides the try again button
 resetGame = () => {
   states.forEach((state) => {
     state.guessed = false
   });
-
+  //Resets lives
   livesLeft = 3;
+  //Hide the try again button
   tryAgainButton.classList.add("hidden")
+  //Load the initial category
   loadQuestions(currCategory)
 };
 

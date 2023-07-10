@@ -24,6 +24,8 @@ These instructions will guide you on how to play the State Trivia Game on your c
 
 ## Resources
 
+https://trello.com/b/Sq5vbOCU/state-trivia
+
 https://www.flaticon.com/
 
 https://javascript.plainenglish.io/how-to-write-a-stunning-readme-for-your-projects-2303bf6827b8
@@ -37,3 +39,8 @@ https://www.w3schools.com/js/js_htmldom_eventlistener.asp
 https://www.w3schools.com/jsref/dom_obj_image.asp
 
 https://www.w3schools.com/jsref/jsref_filter.asp
+
+https://en.wikipedia.org/wiki/Flags_of_the_U.S._states_and_territories
+
+https://en.wikipedia.org/wiki/List_of_U.S._state_and_territory_flowers
+
