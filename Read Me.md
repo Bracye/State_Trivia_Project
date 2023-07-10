@@ -2,6 +2,11 @@
 
 Welcome to the State Trivia Game! This interactive game tests your knowledge about the United States. Have fun and learn interesting facts along the way.
 
+## Installation
+- Clone the repository: `git clone https://github.com/your-username/your-project.git`
+- Navigate to the project directory: `cd your-project`
+- Install dependencies: `npm install`
+
 ## Getting Started
 
 These instructions will guide you on how to play the State Trivia Game on your computer.
